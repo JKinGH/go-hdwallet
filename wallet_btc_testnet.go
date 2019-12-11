@@ -10,7 +10,7 @@ type btc_testnet struct {
 }
 
 func newBTCTestnet(key *Key) Wallet {
-	BTCTestnet := NewBTC(key).(*btc)
+	BTCTestnet := newBTC(key).(*btc)
 	BTCTestnet.name = "Bitcoin"
 	BTCTestnet.symbol = "BTC_TEST"
 	BTCTestnet.key.opt.Params = &BTCTestnetParams

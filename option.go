@@ -18,6 +18,9 @@ var (
 	DefaultAccount      = ZeroQuote
 	DefaultChange       = Zero
 	DefaultAddressIndex = Zero
+
+	//BIP49 隔离见证
+	BIP49Purpose 		= ZeroQuote + 49
 )
 
 // Option of key

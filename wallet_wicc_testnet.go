@@ -1,7 +1,5 @@
 package hdwallet
 
-import "fmt"
-
 func init() {
 	coins[WICC_TESTNET] = newWICCTestnet
 }
@@ -16,16 +14,13 @@ func newWICCTestnet(key *Key) Wallet {
 
 	key.opt.Params = &WICCTestnetParams
 	return &wicc_testnet{
-		name:   "sdsd",
-		symbol: "adaz",
+		name:   "WaykiChain",
+		symbol: "WICC_TEST",
 		key:    key,
 	}
 }
 
 func (c *wicc_testnet) GetType() uint32 {
-	fmt.Println("c.key.opt.CoinType1=",c.key.opt.CoinType)
-//	c.key.opt.CoinType = c.key.opt.CoinType - 1
-	fmt.Println("c.key.opt.CoinType2=",c.key.opt.CoinType)
 	return c.key.opt.CoinType
 }
 
@@ -38,13 +33,9 @@ func (c *wicc_testnet) GetSymbol() string {
 }
 
 func (c *wicc_testnet) GetKey() *Key {
-	fmt.Println("c.key.opt.CoinType3=",c.key.opt.CoinType)
-//	c.key.opt.CoinType = c.key.opt.CoinType - 1
-	fmt.Println("c.key.opt.CoinType4=",c.key.opt.CoinType)
 	return c.key
 }
 
 func (c *wicc_testnet) GetAddress() (string, error) {
-	c.key.opt.CoinType = c.key.opt.CoinType - 1
 	return c.key.AddressBTC()
 }

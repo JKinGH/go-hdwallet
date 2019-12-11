@@ -33,8 +33,7 @@ const(
 	BCH  = ZeroQuote + 145
 	QTUM = ZeroQuote + 2301
 	WICC = ZeroQuote + 99999
-	WICC_TESTNET = ZeroQuote + 99999 +1
-
+	WICC_TESTNET = ZeroQuote + 999999
 
 	// btc token
 	USDT = BTCToken + 1

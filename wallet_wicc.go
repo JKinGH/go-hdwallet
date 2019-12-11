@@ -1,7 +1,5 @@
 package hdwallet
 
-import "fmt"
-
 func init() {
 	coins[WICC] = newWICC
 }

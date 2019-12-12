@@ -201,6 +201,9 @@ func (k *Key) AddressP2WPKH() (string, error) {
 		return "", err
 	}
 
+	//println("addr_hex=",hex.EncodeToString(*addr.Hash160()))
+	//addr.
+
 	return addr.EncodeAddress(), nil
 }
 
@@ -227,4 +230,29 @@ func (k *Key) AddressP2WPKHInP2SH() (string, error) {
 	}
 
 	return addr1.EncodeAddress(), nil
+}
+
+func (k *Key) AddressP2PKH() (string, error) {
+	pubHash, err := k.PublicHash()
+	if err != nil {
+		return "", err
+	}
+
+	addr, err := btcutil.NewAddressPubKeyHash(pubHash, k.opt.Params)
+	if err != nil {
+		return "", err
+	}
+
+	script, err := txscript.PayToAddrScript(addr)
+	if err != nil {
+		return "", err
+	}
+
+	addr1, err := btcutil.NewAddressScriptHash(script, k.opt.Params)
+	if err != nil {
+		return "", err
+	}
+	
+	return addr1.String(), nil
+	
 }

@@ -23,11 +23,14 @@ type Key struct {
 	// for eth
 	PrivateECDSA *ecdsa.PrivateKey
 	PublicECDSA  *ecdsa.PublicKey
+
+	//The flag for ETH Ledger Wallet Path: m/44'/60'/0'/0
+	IsLedger bool
 }
 
 // NewKey creates a master key
 // params: [Mnemonic], [Password], [Language], [Seed]
-func NewKey(opts ...Option) (*Key, error) {
+func NewKey(isLedger bool,opts ...Option) (*Key, error) {
 	var (
 		err error
 		o   = newOptions(opts...)
@@ -49,6 +52,7 @@ func NewKey(opts ...Option) (*Key, error) {
 	key := &Key{
 		opt:      o,
 		Extended: extended,
+		IsLedger : isLedger,
 	}
 
 	err = key.init()
@@ -92,7 +96,15 @@ func (k *Key) GetChildKey(opts ...Option) (*Key, error) {
 	}
 
 	extended := k.Extended
-	for _, i := range no.GetPath() {
+	path := []uint32{}
+	//The flag for ETH Ledger Wallet Path: m/44'/60'/0'/0
+	if k.IsLedger == true {
+		path = []uint32{DefaultPurpose,ETH,DefaultAccount,0}
+	}else{
+		path = no.GetPath()
+	}
+
+	for _, i := range path {
 		extended, err = extended.Child(i)
 		if err != nil {
 			return nil, err

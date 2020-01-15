@@ -5,7 +5,7 @@ import (
 	"github.com/tyler-smith/go-bip39/wordlists"
 )
 
-func setLanguage(language string) {
+func SetLanguage(language string) {
 	switch language {
 	case ChineseSimplified:
 		bip39.SetWordList(wordlists.ChineseSimplified)
@@ -27,8 +27,9 @@ func setLanguage(language string) {
 }
 
 // NewMnemonic creates a random mnemonic
-func NewMnemonic(length int, language string) (string, error) {
-	setLanguage(language)
+// Return the English Mnemonic default
+func NewMnemonic(length int) (string, error) {
+	//setLanguage(language)
 
 	if length < 12 {
 		length = 12
@@ -48,6 +49,6 @@ func NewMnemonic(length int, language string) (string, error) {
 
 // NewSeed creates a hashed seed
 func NewSeed(mnemonic, password, language string) ([]byte, error) {
-	setLanguage(language)
+	SetLanguage(language)
 	return bip39.NewSeedWithErrorChecking(mnemonic, password)
 }

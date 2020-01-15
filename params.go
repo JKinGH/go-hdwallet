@@ -16,6 +16,7 @@ var (
 	USDTParams = chaincfg.MainNetParams
 	WICCParams = chaincfg.MainNetParams
 	WICCTestnetParams = chaincfg.MainNetParams
+	ETHParams = chaincfg.MainNetParams
 )
 
 func init() {
